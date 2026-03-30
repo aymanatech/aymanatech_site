@@ -2,6 +2,7 @@
 // src/components/ThreeBackground.tsx
 
 import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
 
 export default function ThreeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
