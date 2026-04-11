@@ -1,13 +1,13 @@
 // src/app/layout.tsx
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from 'next';
+import '@/app/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Aivexa Labs — AI-Powered Business Automation',
+  title: 'Aymana Tech — AI-Powered Business Automation',
   description: '24/7 AI systems that qualify leads, book calls, and handle support while you sleep.',
   keywords: 'AI automation, lead generation, business automation, WhatsApp automation, AI voice agents',
   openGraph: {
-    title: 'Aivexa Labs — AI-Powered Business Automation',
+    title: 'Aymana Tech — AI-Powered Business Automation',
     description: 'Turn more inquiries into booked work with AI automation.',
     type: 'website',
   },
