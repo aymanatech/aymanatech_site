@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { C, NAV_LINKS } from '@/lib/constants'
 
 const SECTION_IDS: Record<string, string> = {
-  'Home':            'home',
-  'About':           'about',
-  'Services':        'services',
-  'Skills':          'skills',
+  'Home': 'home',
+  'About': 'about',
+  'Services': 'services',
+  'Skills': 'skills',
   'Success Stories': 'success-stories',
 }
 
@@ -31,45 +31,100 @@ export default function Navbar({ activeNav, setActiveNav }: NavbarProps) {
 
   return (
     <>
-      <nav style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '14px 40px',
-        position: 'sticky', top: 0,
-        background: 'rgba(6,0,26,0.92)',
-        backdropFilter: 'blur(14px)',
-        zIndex: 1000,
-        borderBottom: '1px solid rgba(0,212,255,0.1)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }} onClick={() => handleNav('Home')}>
-          <div style={{ width: 28, height: 28, background: C.g5, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, boxShadow: `0 0 12px ${C.cyan}55` }}>🅰</div>
-          <span style={{ fontWeight: 700, fontSize: 16, color: C.cyan }}>Aivexa labs</span>
+      <nav className="flex items-center justify-between px-6 md:px-10 py-3.5 sticky top-0 z-[1000] bg-[rgba(6,0,26,0.92)] backdrop-blur-[14px] border-b border-cyan-400/10">
+        
+        {/* Logo */}
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => handleNav('Home')}
+        >
+          <div
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm shadow-[0_0_12px_rgba(0,212,255,0.35)]"
+            style={{ background: C.g5 }}
+          >
+            🅰
+          </div>
+          <span className="font-bold text-sm text-cyan-400">
+            Aymana Tech
+          </span>
         </div>
 
-        <div className="nav-desktop" style={{ display: 'flex', gap: 4 }}>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex gap-1">
           {NAV_LINKS.map((l) => (
-            <span key={l} className={`nav-link${activeNav === l ? ' active' : ''}`} onClick={() => handleNav(l)}>{l}</span>
+            <span
+              key={l}
+              onClick={() => handleNav(l)}
+              className={`cursor-pointer px-3 py-2 rounded-lg text-sm transition ${
+                activeNav === l
+                  ? 'text-cyan-400 bg-gradient-to-r from-cyan-400 to-blue-500'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {l}
+            </span>
           ))}
         </div>
 
-        <div className="nav-desktop" style={{ display: 'flex' }}>
-          <button className="btn-primary" style={{ padding: '9px 18px', fontSize: 13, borderRadius: 20 }} onClick={() => handleNav('Success Stories')}>
+        {/* Desktop Button */}
+        <div className="hidden md:flex">
+          <button
+            onClick={() => handleNav('Success Stories')}
+            className="px-4 py-2 text-sm rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-medium hover:opacity-90 transition"
+          >
             ❤️ Let&apos;s chat
           </button>
         </div>
 
-        <button className="nav-mobile-btn" style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 8, flexDirection: 'column', gap: 5 }} onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
-          {[0,1,2].map((i) => (
-            <span key={i} style={{ display: 'block', width: 22, height: 2, background: menuOpen ? C.cyan : '#ccd6f6', borderRadius: 2, transition: 'all 0.2s', transform: menuOpen ? (i===0 ? 'rotate(45deg) translate(5px,5px)' : i===2 ? 'rotate(-45deg) translate(5px,-5px)' : 'scaleX(0)') : 'none' }} />
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className={`block w-5 h-[2px] rounded transition-all duration-200 ${
+                menuOpen ? 'bg-cyan-400' : 'bg-gray-300'
+              }`}
+              style={{
+                transform: menuOpen
+                  ? i === 0
+                    ? 'rotate(45deg) translate(5px,5px)'
+                    : i === 2
+                    ? 'rotate(-45deg) translate(5px,-5px)'
+                    : 'scaleX(0)'
+                  : 'none',
+              }}
+            />
           ))}
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div style={{ position: 'fixed', top: 57, left: 0, right: 0, background: 'rgba(6,0,26,0.98)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,212,255,0.15)', zIndex: 999, padding: '12px 20px 20px', display: 'flex', flexDirection: 'column', gap: 4, animation: 'fadeUp 0.25s ease both' }}>
+        <div className="fixed top-[57px] left-0 right-0 z-[999] px-5 pb-5 pt-3 flex flex-col gap-1 bg-[rgba(6,0,26,0.98)] backdrop-blur-[16px] border-b border-cyan-400/20 animate-[fadeUp_0.25s_ease_both]">
           {NAV_LINKS.map((l) => (
-            <span key={l} className={`nav-link${activeNav === l ? ' active' : ''}`} style={{ padding: '12px 16px', fontSize: 15 }} onClick={() => handleNav(l)}>{l}</span>
+            <span
+              key={l}
+              onClick={() => handleNav(l)}
+              className={`px-4 py-3 text-sm rounded-lg cursor-pointer transition ${
+                activeNav === l
+                  ? 'text-cyan-400'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {l}
+            </span>
           ))}
-          <button className="btn-primary" style={{ marginTop: 8, justifyContent: 'center' }} onClick={() => handleNav('Success Stories')}>❤️ Let&apos;s chat</button>
+
+          <button
+            onClick={() => handleNav('Success Stories')}
+            className="mt-2 flex justify-center px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-medium"
+          >
+            ❤️ Let&apos;s chat
+          </button>
         </div>
       )}
     </>
