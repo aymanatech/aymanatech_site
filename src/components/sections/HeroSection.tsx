@@ -47,28 +47,52 @@ export default function HeroSection() {
       <div className="relative z-[5] text-center px-[clamp(16px,4vw,40px)] pt-[clamp(40px,6vw,80px)] pb-[56px] max-w-[860px] mx-auto w-full">
         
         <h1
-          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl"
+          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight"
           style={{
             opacity: animIn ? 1 : 0,
             transform: animIn ? 'translateY(0)' : 'translateY(24px)',
             transition: 'all 0.8s ease'
           }}
         >
-          <span className="bg-[linear-gradient(90deg,#ff6b6b,#ff8e53,#ffd700)] bg-clip-text text-transparent">
+          <span style={{
+            backgroundImage: 'linear-gradient(90deg,#ff6b6b,#ff8e53,#ffd700)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            display: 'block'
+          }}>
             Turn More Inquiries Into
-          </span><br/>
-          <span className="bg-[linear-gradient(90deg,#ffd700,#ff8e53)] bg-clip-text text-transparent">
+          </span>
+          <span style={{
+            backgroundImage: 'linear-gradient(90deg,#ffd700,#ff8e53)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            display: 'block'
+          }}>
             Booked Work
-          </span><br/>
+          </span>
           <span
-            className="italic font-extrabold bg-clip-text text-transparent"
-            style={{ background: C.g3 }}
+            style={{
+              backgroundImage: C.g3,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              display: 'block',
+              fontStyle: 'italic'
+            }}
           >
             Fast Follow-Up That
-          </span><br/>
+          </span>
           <span
-            className="italic bg-clip-text text-transparent"
-            style={{ background: C.g4 }}
+            style={{
+              backgroundImage: C.g4,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              display: 'block',
+              fontStyle: 'italic'
+            }}
           >
             Wins Deals
           </span>
