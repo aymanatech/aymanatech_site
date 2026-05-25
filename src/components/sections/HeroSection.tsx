@@ -20,70 +20,168 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <div style={{ position:'relative', overflow:'hidden', minHeight:'100vh', display:'flex', flexDirection:'column' }}>
+    <div className="relative overflow-hidden min-h-screen flex flex-col">
+      
       {/* ambient blobs */}
-      <div style={{ position:'absolute',top:'-8%',left:'18%',width:480,height:380,borderRadius:'50%',background:'radial-gradient(circle,rgba(0,212,255,.07),transparent 70%)',pointerEvents:'none' }}/>
-      <div style={{ position:'absolute',top:'30%',right:'-4%',width:380,height:380,borderRadius:'50%',background:'radial-gradient(circle,rgba(91,43,224,.1),transparent 70%)',pointerEvents:'none' }}/>
+      <div className="absolute top-[-8%] left-[18%] w-[480px] h-[380px] rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(0,212,255,.07),transparent_70%)]"/>
+      <div className="absolute top-[30%] right-[-4%] w-[380px] h-[380px] rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(91,43,224,.1),transparent_70%)]"/>
+
       {/* floats */}
       {FLOATS.map(({t,x,y},i) => (
-        <div key={i} style={{ position:'absolute',left:`${x}%`,top:`${y}%`,fontSize:16,opacity:0.35,animation:`float ${3+i}s ease-in-out infinite alternate`,animationDelay:`${i*0.4}s`,pointerEvents:'none',zIndex:1,filter:`drop-shadow(0 0 5px ${C.cyan}88)` }}>{t}</div>
+        <div
+          key={i}
+          className="absolute text-[16px] opacity-[0.35] pointer-events-none z-[1]"
+          style={{
+            left: `${x}%`,
+            top: `${y}%`,
+            animation: `float ${3+i}s ease-in-out infinite alternate`,
+            animationDelay: `${i*0.4}s`,
+            filter: `drop-shadow(0 0 5px ${C.cyan}88)`
+          }}
+        >
+          {t}
+        </div>
       ))}
 
       {/* content */}
-      <div style={{ position:'relative',zIndex:5,textAlign:'center',padding:'clamp(40px,6vw,80px) clamp(16px,4vw,40px) 56px',maxWidth:860,margin:'0 auto',width:'100%' }}>
-        <h1 className='text-5xl sm:text-6xl lg:text-7xl xl:text-8xl' style={{ opacity:animIn?1:0,transform:animIn?'translateY(0)':'translateY(24px)',transition:'all 0.8s ease' }}>
-          <span style={{ background:'linear-gradient(90deg,#ff6b6b,#ff8e53,#ffd700)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent' }}>Turn More Inquiries Into</span><br/>
-          <span style={{ background:'linear-gradient(90deg,#ffd700,#ff8e53)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent' }}>Booked Work</span><br/>
-          <span style={{ background:C.g3,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',fontStyle:'italic',fontWeight:800 }}>Fast Follow-Up That</span><br/>
-          <span style={{ background:C.g4,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',fontStyle:'italic' }}>Wins Deals</span>
+      <div className="relative z-[5] text-center px-[clamp(16px,4vw,40px)] pt-[clamp(40px,6vw,80px)] pb-[56px] max-w-[860px] mx-auto w-full">
+        
+        <h1
+          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl"
+          style={{
+            opacity: animIn ? 1 : 0,
+            transform: animIn ? 'translateY(0)' : 'translateY(24px)',
+            transition: 'all 0.8s ease'
+          }}
+        >
+          <span className="bg-[linear-gradient(90deg,#ff6b6b,#ff8e53,#ffd700)] bg-clip-text text-transparent">
+            Turn More Inquiries Into
+          </span><br/>
+          <span className="bg-[linear-gradient(90deg,#ffd700,#ff8e53)] bg-clip-text text-transparent">
+            Booked Work
+          </span><br/>
+          <span
+            className="italic font-extrabold bg-clip-text text-transparent"
+            style={{ background: C.g3 }}
+          >
+            Fast Follow-Up That
+          </span><br/>
+          <span
+            className="italic bg-clip-text text-transparent"
+            style={{ background: C.g4 }}
+          >
+            Wins Deals
+          </span>
         </h1>
 
-        <p style={{ color:'#9aaccc',fontSize:'clamp(13px,1.5vw,15px)',maxWidth:540,margin:'18px auto 0',lineHeight:1.75,opacity:animIn?1:0,transition:'opacity 0.8s 0.2s ease' }}>
+        <p
+          className="text-[#9aaccc] text-[clamp(13px,1.5vw,15px)] max-w-[540px] mx-auto mt-[18px] leading-[1.75]"
+          style={{
+            opacity: animIn ? 1 : 0,
+            transition: 'opacity 0.8s 0.2s ease'
+          }}
+        >
           24/7 AI voice systems that qualify leads, book calls, and handle support while you sleep.
           Average client sees 300% increase in qualified leads within 30 days.
         </p>
 
         {/* slide dots */}
-        <div style={{ display:'flex',justifyContent:'center',gap:7,marginTop:22 }}>
+        <div className="flex justify-center gap-[7px] mt-[22px]">
           {[0,1,2,3,4].map(i=>(
-            <div key={i} onClick={()=>setSlideIndex(i)} style={{ width:i===slideIndex?26:9,height:9,borderRadius:5,background:i===slideIndex?C.gBtn:'rgba(255,255,255,.15)',transition:'all .3s',cursor:'pointer',boxShadow:i===slideIndex?`0 0 8px ${C.cyan}88`:'none' }}/>
+            <div
+              key={i}
+              onClick={()=>setSlideIndex(i)}
+              className="h-[9px] rounded-[5px] cursor-pointer transition-all duration-300"
+              style={{
+                width: i===slideIndex ? 26 : 9,
+                background: i===slideIndex ? C.gBtn : 'rgba(255,255,255,.15)',
+                boxShadow: i===slideIndex ? `0 0 8px ${C.cyan}88` : 'none'
+              }}
+            />
           ))}
         </div>
-        <div style={{ height:3,background:'rgba(255,255,255,.08)',borderRadius:2,margin:'14px auto 0',maxWidth:380,overflow:'hidden' }}>
-          <div style={{ height:'100%',background:C.gBtn,width:`${(slideIndex+1)*20}%`,transition:'width 0.5s',boxShadow:`0 0 7px ${C.cyan}` }}/>
+
+        <div className="h-[3px] bg-[rgba(255,255,255,.08)] rounded-[2px] mt-[14px] mx-auto max-w-[380px] overflow-hidden">
+          <div
+            className="h-full transition-all duration-500"
+            style={{
+              background: C.gBtn,
+              width: `${(slideIndex+1)*20}%`,
+              boxShadow: `0 0 7px ${C.cyan}`
+            }}
+          />
         </div>
 
         {/* badges */}
-        <div className="hero-badges" style={{ display:'flex',justifyContent:'center',gap:9,marginTop:24,flexWrap:'wrap',opacity:animIn?1:0,transition:'opacity 0.8s 0.35s ease' }}>
+        <div
+          className="hero-badges flex justify-center gap-[9px] mt-[24px] flex-wrap"
+          style={{
+            opacity: animIn ? 1 : 0,
+            transition: 'opacity 0.8s 0.35s ease'
+          }}
+        >
           {HERO_BADGES.map((b,i)=>(
-            <div key={i} style={{ display:'flex',alignItems:'center',gap:6,background:'rgba(255,255,255,.05)',border:`1px solid ${b.color}44`,borderRadius:18,padding:'6px 14px',fontSize:12,fontWeight:500,color:'#ccd6f6' }}>
-              <span style={{ color:b.color,fontSize:7 }}>●</span>{b.text}
+            <div
+              key={i}
+              className="flex items-center gap-[6px] bg-[rgba(255,255,255,.05)] rounded-[18px] px-[14px] py-[6px] text-[12px] font-medium text-[#ccd6f6]"
+              style={{ border: `1px solid ${b.color}44` }}
+            >
+              <span style={{ color: b.color, fontSize: 7 }}>●</span>
+              {b.text}
             </div>
           ))}
         </div>
 
         {/* stats */}
-        <div className="hero-stats" style={{ display:'flex',justifyContent:'center',gap:10,marginTop:20,flexWrap:'wrap',opacity:animIn?1:0,transition:'opacity 0.8s 0.5s ease' }}>
+        <div
+          className="hero-stats flex justify-center gap-[10px] mt-[20px] flex-wrap"
+          style={{
+            opacity: animIn ? 1 : 0,
+            transition: 'opacity 0.8s 0.5s ease'
+          }}
+        >
           {HERO_STATS.map((s,i)=>(
-            <div key={i} style={{ background:'rgba(255,255,255,.04)',border:'1px solid rgba(0,212,255,.15)',borderRadius:13,padding:'11px 16px',display:'flex',alignItems:'center',gap:10,minWidth:130,backdropFilter:'blur(8px)' }}>
-              <div style={{ width:34,height:34,borderRadius:9,background:s.grad,display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,boxShadow:'0 4px 10px rgba(0,212,255,.28)',flexShrink:0 }}>{s.icon}</div>
-              <div style={{ textAlign:'left' }}>
-                <div style={{ fontWeight:800,fontSize:17,color:'white',lineHeight:1.1 }}>{s.val}</div>
-                <div style={{ fontSize:10,color:'#7899cc' }}>{s.lab}</div>
+            <div
+              key={i}
+              className="bg-[rgba(255,255,255,.04)] border border-[rgba(0,212,255,.15)] rounded-[13px] px-[16px] py-[11px] flex items-center gap-[10px] min-w-[130px] backdrop-blur-[8px]"
+            >
+              <div
+                className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center text-[16px] shrink-0"
+                style={{
+                  background: s.grad,
+                  boxShadow: '0 4px 10px rgba(0,212,255,.28)'
+                }}
+              >
+                {s.icon}
+              </div>
+
+              <div className="text-left">
+                <div className="font-extrabold text-[17px] text-white leading-[1.1]">
+                  {s.val}
+                </div>
+                <div className="text-[10px] text-[#7899cc]">
+                  {s.lab}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* CTAs */}
-        <div className="hero-ctas" style={{ display:'flex',justifyContent:'center',gap:12,marginTop:28,flexWrap:'wrap',opacity:animIn?1:0,transition:'opacity 0.8s 0.65s ease' }}>
+        <div
+          className="hero-ctas flex justify-center gap-[12px] mt-[28px] flex-wrap"
+          style={{
+            opacity: animIn ? 1 : 0,
+            transition: 'opacity 0.8s 0.65s ease'
+          }}
+        >
           <button className="btn-primary">Free Consultation →</button>
           <button className="btn-outline">▷ Request a Quote</button>
         </div>
       </div>
 
-      {/* Robot - hidden on mobile via CSS */}
-      <div className="hero-robot" style={{ position:'absolute',left:'2%',top:'40%',transform:'translateY(-50%)',zIndex:2 }}>
+      {/* Robot */}
+      <div className="hero-robot absolute left-[2%] top-[40%] translate-y-[-50%] z-[2]">
         <Robot/>
       </div>
     </div>
