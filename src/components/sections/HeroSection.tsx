@@ -143,7 +143,7 @@ export default function HeroSection() {
           {HERO_STATS.map((s,i)=>(
             <div
               key={i}
-              className="bg-[rgba(255,255,255,.04)] border border-[rgba(0,212,255,.15)] rounded-[13px] px-[16px] py-[11px] flex items-center gap-[10px] min-w-[130px] backdrop-blur-[8px]"
+              className="bg-[rgba(255,255,255,.04)] border border-[rgba(0,212,255,.15)] rounded-[13px] px-[16px] py-[11px] flex items-center gap-[10px] min-w-[130px] backdrop-blur-[3px]"
             >
               <div
                 className="w-[34px] h-[34px] rounded-[9px] flex items-center justify-center text-[16px] shrink-0"
