@@ -1,0 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Design tokens. Contrast (WCAG 2.1):
+   light  foreground 16.1:1 · muted-foreground 6.2:1 · accent on white 5.4:1
+   dark   foreground 17.4:1 · muted-foreground 8.2:1 · accent 7.1:1
+   ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: 0 0% 96%;
+    --foreground: 0 0% 11%;
+    --ink-edge: 0 0% 36%;
+    --card: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 38%;
+    --subtle: 0 0% 26%;
+    --border: 0 0% 85%;
+    --ring: 216 90% 47%;
+    --accent: 216 90% 47%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 213 100% 62%;
+    --accent-dark: 220 75% 38%;
+    --shadow-a: 0.05;
+    --header-h: 76px;
+  }
+
+  /* Dark theme: applied by the .dark class on <html> (toggle, saved preference, or OS default). */
+  :root.dark {
+    color-scheme: dark;
+    --background: 222 22% 7%;
+    --foreground: 0 0% 96%;
+    --ink-edge: 220 10% 72%;
+    --card: 222 18% 11%;
+    --muted: 222 20% 9%;
+    --muted-foreground: 220 10% 68%;
+    --subtle: 220 12% 80%;
+    --border: 222 14% 22%;
+    --ring: 213 100% 66%;
+    --accent: 213 100% 66%;
+    --accent-foreground: 222 30% 8%;
+    --accent-light: 209 100% 72%;
+    --accent-dark: 213 100% 76%;
+    --shadow-a: 0.35;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background font-sans text-base text-foreground antialiased;
+    line-height: 1.65;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance font-semibold text-foreground;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.2);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Body copy: comfortable measure, 1.65 line height, no negative tracking. */
+  .text-body {
+    @apply text-base leading-[1.65] text-muted-foreground;
+  }
+
+  /* Long-form article content (blog posts, guides, legal pages). */
+  .prose-content {
+    @apply max-w-[68ch] text-[1.0625rem] leading-[1.75] text-subtle;
+  }
+  .prose-content h2 {
+    @apply mt-12 text-2xl font-semibold leading-tight tracking-[-0.02em] md:text-[1.75rem];
+  }
+  .prose-content h3 {
+    @apply mt-8 text-xl font-semibold;
+  }
+  .prose-content p {
+    @apply mt-5;
+  }
+  .prose-content ul {
+    @apply mt-5 flex list-disc flex-col gap-2 pl-5 marker:text-accent;
+  }
+  .prose-content a {
+    @apply font-medium text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent;
+  }
+  .prose-content > :first-child {
+    @apply mt-0;
+  }
+}
+
+/* Custom cursor (components/ui/custom-cursor.tsx): hide the native pointer except where typing. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+html.custom-cursor :is(input, textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}
+
+/* Brief colour cross-fade when switching theme without View Transitions. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, fill 0.4s ease, stroke 0.4s ease, box-shadow 0.4s ease !important;
+  transition-delay: 0s !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* GSAP reveal targets start hidden only when JS is running (html.js is set in <head> before paint).
+   A 4s failsafe in the same script removes .js if the animation layer never loads. */
+html.js [data-reveal],
+html.js [data-stagger-item],
+html.js [data-intro] > * {
+  visibility: hidden;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  html.js [data-stagger-item],
+  html.js [data-intro] > * {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .text-gradient-ink {
+    @apply bg-text-ink bg-clip-text text-transparent;
+  }
+  .text-gradient-accent {
+    @apply bg-text-accent bg-clip-text text-transparent;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12.5%, #000 87.5%, transparent 100%);
+  }
+  .chip-surface {
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Hero: exactly one screen tall (svh = the visible height on mobile, excluding browser bars).
+   Type, gaps and the orb scale with BOTH width and height, so the content fits one screen from
+   320px phones to short 1366x657 laptops. min-height (not height) lets it grow rather than clip
+   in extreme cases such as a phone in landscape.
+   ------------------------------------------------------------------ */
+.hero-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.hero-stack {
+  gap: clamp(1rem, 3.2svh, 2.5rem);
+  padding-top: calc(var(--header-h) + clamp(0.5rem, 3svh, 3rem));
+  padding-bottom: clamp(3.5rem, 9svh, 6rem);
+}
+.hero-title {
+  font-size: clamp(2rem, min(1.35rem + 3.9vw, 0.25rem + 7.2svh), 5rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+.hero-lead {
+  font-size: clamp(1rem, min(0.95rem + 0.3vw, 0.7rem + 1.2svh), 1.1875rem);
+  line-height: 1.6;
+}
+.hero-actions {
+  gap: clamp(1rem, 3svh, 2rem);
+}
+.orb-size {
+  width: clamp(104px, 17svh, 152px);
+  height: clamp(104px, 17svh, 152px);
+}
+/* Very short phones (e.g. 320x568): tighter type and orb; the secondary link is dropped here only
+   (it is repeated further down the page), so the hero still fits one screen. */
+@media (max-height: 620px) and (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  .hero-lead {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .orb-size {
+    width: 96px;
+    height: 96px;
+  }
+  .hero-secondary {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Animated logo (components/ui/logo.tsx)
+   Touch / no-hover devices: mark + wordmark always visible.
+   Mouse devices: only the mark shows; the wordmark slides out on hover
+   or keyboard focus, letter by letter, while the mark tilts and glows.
+   ------------------------------------------------------------------ */
+.logo {
+  --logo-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+}
+.logo-mark-img {
+  transition: transform 0.6s var(--logo-ease);
+}
+.logo-glow {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.4s ease, transform 0.6s var(--logo-ease);
+}
+.logo-reveal {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-left: 0.625rem;
+  transition: grid-template-columns 0.55s var(--logo-ease), margin-left 0.55s var(--logo-ease), opacity 0.3s ease;
+}
+.logo-reveal > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.logo-char {
+  display: inline-block;
+  transition: transform 0.5s var(--logo-ease), opacity 0.35s ease;
+  transition-delay: calc(var(--i) * 22ms);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo[data-interactive="true"] .logo-reveal {
+    grid-template-columns: 0fr;
+    margin-left: 0;
+    opacity: 0;
+  }
+  .logo[data-interactive="true"] .logo-char {
+    transform: translateY(0.6em);
+    opacity: 0;
+    transition-delay: 0ms;
+  }
+
+  :is(a, button):hover > .logo[data-interactive="true"] .logo-reveal,
+  :is(a, button):focus-visible > .logo[data-interactive="true"] .logo-reveal,
+  .logo[data-interactive="true"]:hover .logo-reveal {
+    grid-template-columns: 1fr;
+    margin-left: 0.625rem;
+    opacity: 1;
+  }
+  :is(a, button):hover > .logo[data-interactive="true"] .logo-char,
+  :is(a, button):focus-visible > .logo[data-interactive="true"] .logo-char,
+  .logo[data-interactive="true"]:hover .logo-char {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: calc(80ms + var(--i) * 22ms);
+  }
+
+  :is(a, button):hover > .logo .logo-mark-img,
+  :is(a, button):focus-visible > .logo .logo-mark-img {
+    transform: rotate(-8deg) scale(1.08);
+  }
+  :is(a, button):hover > .logo .logo-glow,
+  :is(a, button):focus-visible > .logo .logo-glow {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Collapsed (compact header pill): wordmark folds away on every device and ignores hover. */
+.logo[data-collapsed="true"] .logo-reveal {
+  grid-template-columns: 0fr !important;
+  margin-left: 0 !important;
+  opacity: 0 !important;
+}
+
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-spin-slow,
+  .animate-spin-slower,
+  .animate-drift,
+  .animate-glow-pulse {
+    animation: none;
+  }
+  .logo-mark-img,
+  .logo-glow,
+  .logo-reveal,
+  .logo-char {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
