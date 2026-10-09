@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SITE_URL, site } from "@/lib/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
+import { OrganizationSchema, FAQSchema } from "@/components/SchemaOrg";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { Header } from "@/components/sections/header";
 import { Footer } from "@/components/sections/footer";
@@ -79,12 +80,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     // suppressHydrationWarning: the <head> script sets the theme class before React hydrates.
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <OrganizationSchema />
+        <FAQSchema />
       </head>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-pill focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow-pill"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-pill focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow-raised"
         >
           Skip to content
         </a>
