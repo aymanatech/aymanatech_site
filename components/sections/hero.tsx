@@ -81,6 +81,7 @@ export function Hero() {
           <span className="text-gradient-ink pb-1">{hero.titleTop}</span>
           <TypedLine active={animate && inView} />
         </h1>
+        <p className="mt-4 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">{hero.titleBottom}</p>
         <p className="hero-lead max-w-[58ch] text-muted-foreground">{hero.subtitle}</p>
         <div className="hero-actions flex flex-col items-center">
           <OrbButton href={bookingLinkProps.href}>{hero.cta}</OrbButton>
@@ -107,7 +108,7 @@ export function OrbButton({ href, children }: { href: string; children: React.Re
     <Link
       href={href}
       {...(isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="orb-size group relative grid place-items-center rounded-full text-base font-semibold text-white transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] hover:scale-105 active:scale-95 motion-reduce:transform-none sm:text-lg"
+      className="orb-size group relative grid place-items-center rounded-full text-base font-semibold text-white transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.0,0.64,1)] hover:scale-[1.02]"
     >
       <span aria-hidden className="absolute -inset-5 animate-glow-pulse rounded-full bg-[#1f6feb]/45 blur-2xl" />
       <span aria-hidden className="absolute inset-0 overflow-hidden rounded-full shadow-raised">
