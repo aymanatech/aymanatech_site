@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { caseStudies } from "@/lib/work";
 
 export { site };
 
@@ -53,25 +54,27 @@ export const pricing = {
   title: "Simple plans for product and automation work",
   subtitle: "Flexible engagements for ongoing automation and fixed-scope delivery.",
   yearlyDiscount: 0.15,
+  cta: "Discuss your project",
+  note: "Every engagement is tailored to your goals.",
   plans: [
     {
       name: "Automation",
       monthly: 1200,
-      description: "For ongoing workflow optimization and AI support",
+      blurb: "For ongoing workflow optimization and AI support",
       popular: false,
       features: ["Workflow mapping", "Automation setup", "Ops monitoring", "Monthly optimization"],
     },
     {
       name: "Growth",
       monthly: 2200,
-      description: "For teams that need product delivery and automation in parallel",
+      blurb: "For teams that need product delivery and automation in parallel",
       popular: true,
       features: ["AI workflow automations", "Custom software", "Weekly updates", "Strategy support"],
     },
     {
       name: "Scale",
       monthly: 3800,
-      description: "For more complex platform work and operational systems",
+      blurb: "For more complex platform work and operational systems",
       popular: false,
       features: ["Multi-system architecture", "Custom dashboards", "Integration design", "Advanced support"],
     },
@@ -104,11 +107,12 @@ export const faq = {
 };
 
 export const stats = {
+  title: "Results that speak for themselves",
   items: [
-    { label: "Years building", value: "5", suffix: "+" },
-    { label: "Projects shipped", value: "40", suffix: "+" },
-    { label: "Workflow hours saved", value: "1k", suffix: "+" },
-    { label: "Avg. launch speed", value: "4", suffix: " weeks" },
+    { label: "Years building", value: 5, suffix: "+" },
+    { label: "Projects shipped", value: 40, suffix: "+" },
+    { label: "Workflow hours saved", value: 1, suffix: "k+" },
+    { label: "Avg. launch speed", value: 4, suffix: " weeks" },
   ],
 };
 
@@ -162,11 +166,110 @@ export const team = {
   title: "A senior team built for execution",
   subtitle: "Operators, strategists, designers, and engineers working together on the same goal.",
   members: [
-    { name: "Ayman", role: "Founder & Strategy" },
-    { name: "Mila", role: "Product Designer" },
-    { name: "Noah", role: "Senior Engineer" },
-    { name: "Zahra", role: "Operations Lead" },
-    { name: "Leo", role: "Automation Engineer" },
-    { name: "Amal", role: "Delivery Manager" },
+    { name: "Ayman", role: "Founder & Strategy", bio: "Helps teams turn business goals into practical product and automation roadmaps." },
+    { name: "Mila", role: "Product Designer", bio: "Designs clear, accessible product experiences around the needs of real users." },
+    { name: "Noah", role: "Senior Engineer", bio: "Builds reliable software foundations and integrations that scale with the business." },
+    { name: "Zahra", role: "Operations Lead", bio: "Keeps delivery focused and makes sure every solution fits the way teams work." },
+    { name: "Leo", role: "Automation Engineer", bio: "Connects tools and automates repetitive workflows with measurable outcomes." },
+    { name: "Amal", role: "Delivery Manager", bio: "Coordinates collaboration and keeps projects moving from discovery to launch." },
   ],
+};
+
+export const comparison = {
+  badge: "Why Aymana Tech",
+  title: "A better way to build",
+  subtitle: "Senior expertise, clear ownership, and practical outcomes from day one.",
+  ours: {
+    points: [
+      "One senior team from strategy through delivery",
+      "Solutions designed around your existing workflows",
+      "Transparent progress and clear communication",
+      "You own the code, documentation, and systems",
+    ],
+  },
+  theirs: {
+    label: "The usual alternative",
+    points: [
+      "Separate vendors for strategy, design, and development",
+      "Generic tools that do not fit your workflows",
+      "Unclear timelines and limited visibility",
+      "Ongoing dependence on the original vendor",
+    ],
+  },
+};
+
+export const process = {
+  badge: "Our process",
+  title: "From first conversation to live system",
+  subtitle: "A clear, collaborative path from understanding the problem to delivering measurable results.",
+  steps: [
+    {
+      title: "Discover",
+      body: "We map your goals, users, workflows, and constraints to find the highest-impact opportunity.",
+      duration: "Week 1",
+      details: ["Review existing tools and processes", "Agree on scope and success measures", "Prioritize the first release"],
+    },
+    {
+      title: "Design and build",
+      body: "We shape the solution, validate key decisions, and share working progress throughout delivery.",
+      duration: "Weeks 2–5",
+      details: ["Define the technical approach", "Build and test in focused iterations", "Review progress together each week"],
+    },
+    {
+      title: "Launch and improve",
+      body: "We launch with a clear handoff, monitor real-world use, and improve based on what the data shows.",
+      duration: "Ongoing",
+      details: ["Prepare your team and systems for launch", "Document and hand over the solution", "Measure results and plan improvements"],
+    },
+  ],
+};
+
+export const projects = {
+  badge: "Selected work",
+  title: "Built to make a difference",
+  subtitle: "A few examples of the outcomes our product and automation work can deliver.",
+  projects: caseStudies.map((study) => ({
+    tab: study.client,
+    client: study.industry.replaceAll("-", " "),
+    title: study.title,
+    body: study.summary,
+    metrics: study.results.slice(0, 2),
+  })),
+};
+
+export const audit = {
+  title: "Find the right workflows to automate",
+  lead: "In a focused 45-minute session, we map your manual work and identify practical opportunities for AI and automation.",
+  youGet: [
+    "A map of your highest-friction workflows",
+    "An ROI-ranked list of automation opportunities",
+    "A practical view of timelines, risks, and next steps",
+  ],
+  steps: [
+    { title: "Share your context", body: "Tell us about your team, tools, and the work that takes too much time." },
+    { title: "Map the opportunity", body: "We identify bottlenecks and assess which tasks are safe and worthwhile to automate." },
+    { title: "Get your action plan", body: "Leave with prioritized recommendations and clear next steps." },
+  ],
+};
+
+export const careers = {
+  intro: "Join a remote-first team building thoughtful software and automation for growing businesses.",
+  roles: [
+    { title: "Senior Full-Stack Engineer", location: "Remote", type: "Full-time" },
+    { title: "AI & Automation Engineer", location: "Remote", type: "Full-time" },
+    { title: "Product Designer", location: "Remote", type: "Contract" },
+  ],
+  perks: [
+    { title: "Remote-first", body: "Work from where you do your best work, with a team that values clear communication." },
+    { title: "Meaningful work", body: "Build systems that solve real problems for the people who use them." },
+    { title: "Room to grow", body: "Take ownership, deepen your craft, and help shape how we work." },
+    { title: "Built on trust", body: "We focus on outcomes, thoughtful collaboration, and sustainable delivery." },
+  ],
+};
+
+export const footer = {
+  titleTop: "Have a workflow worth fixing?",
+  titleBottom: "Let’s build a better way.",
+  blurb: "Tell us what is slowing your team down. We’ll help you find a practical path forward.",
+  cta: "Book a call",
 };
