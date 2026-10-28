@@ -18,9 +18,8 @@ import { FAQ } from "@/components/sections/faq";
 import { JsonLd } from "@/components/page/json-ld";
 
 export const metadata: Metadata = pageMetadata({
-  title: `${site.name} | AI Automation Agency & Custom Software Development`,
-  description:
-    "AI automation agency and custom software company. We build AI agents, workflow automations, SaaS MVPs, and web and mobile apps, live in weeks, not quarters.",
+  title: "AI Automation & Software Development Agency | Aymana Tech",
+  description: "AI automation and custom software for growing teams. Build agents, automate workflows, and launch SaaS products in weeks.",
   path: "/",
   absoluteTitle: true,
 });

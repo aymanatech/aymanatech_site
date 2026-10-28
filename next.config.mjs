@@ -8,6 +8,10 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/:path*",
+        headers: [{ key: "Strict-Transport-Security", value: "max-age=31536000" }],
+      },
+      {
         source: "/:all*(woff2|png|jpg|svg)",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },

@@ -272,7 +272,7 @@ export function ChatWidget({ transport = mockTransport }: { transport?: ChatTran
         style={{ transition: `transform 500ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear ${open ? "0s" : "500ms"}` }}
       >
         <header className="flex items-center gap-3 border-b border-border/60 bg-card px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
-          <span className="relative grid size-10 shrink-0 place-items-center rounded-full bg-background ring-1 ring-border/60">
+          <span aria-hidden className="relative grid size-10 shrink-0 place-items-center rounded-full bg-background ring-1 ring-border/60">
             <LogoMark className="size-7 [&_img]:size-7" />
             <span className="absolute bottom-0 right-0 size-3 rounded-full bg-emerald-500 ring-2 ring-card" aria-hidden />
           </span>

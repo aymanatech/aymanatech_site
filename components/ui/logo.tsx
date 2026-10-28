@@ -9,7 +9,7 @@ export function LogoMark({ className, priority = false }: { className?: string; 
       <span aria-hidden className="logo-glow absolute inset-0 rounded-full bg-accent/35 blur-md" />
       <Image
         src="/brand/aymana-tech-mark-128.png"
-        alt=""
+        alt={site.name}
         width={36}
         height={36}
         priority={priority}
@@ -43,7 +43,6 @@ export function Logo({
       <LogoMark priority={priority} />
       <span className="logo-reveal">
         <span className="py-1 font-display text-[1.1875rem] font-bold leading-none tracking-[-0.03em] text-foreground">
-          <span className="sr-only">{site.name}</span>
           <span aria-hidden>
             {chars.map((ch, i) => (
               <span key={i} className={ch === " " ? "logo-char w-[0.3em]" : "logo-char"} style={{ "--i": i } as React.CSSProperties}>
